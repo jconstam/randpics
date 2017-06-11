@@ -1,0 +1,7 @@
+# Random Pictures
+Searches through an archive of pictures and selects some of them to be copied to another location to be used by a screensaver
+
+# Build Status
+[![Build Status](https://travis-ci.org/jconstam/randpics.svg?branch=master)](https://travis-ci.org/jconstam/randpics)
+
+Built using [Travis-CI](https://travis-ci.org/jconstam/randpics)
