@@ -7,7 +7,14 @@ import (
 	"testing"
 )
 
-func testParse(t *testing.T, argsGoodExpected bool, sourceExpected string, destExpected string, countExpected int) {
+var setup = false
+
+func parseArgsTest(t *testing.T, argsGoodExpected bool, sourceExpected string, destExpected string, countExpected int) {
+	if !setup {
+		setupArgs()
+		setup = true
+	}
+
 	argsGood, source, dest, count := parseArgs()
 
 	if argsGood != argsGoodExpected {
@@ -28,22 +35,20 @@ func buildFakeArgs(sourcePath string, destPath string, count int) {
 	os.Args = []string{"", "-src=" + sourcePath, "-dst=" + destPath, "-count=" + strconv.Itoa(count)}
 }
 
-/*
 func TestParse_BadSource(t *testing.T) {
-	//source, _ := ioutil.TempDir("", "")
 	dest, _ := ioutil.TempDir("", "")
 
 	buildFakeArgs("aa", dest, 1)
 
-	testParse(t, false, "aa", dest, 1)
+	parseArgsTest(t, false, "aa", dest, 1)
 }
+
 func TestParse_BadDest(t *testing.T) {
 	source, _ := ioutil.TempDir("", "")
-	//dest, _ := ioutil.TempDir("", "")
 
 	buildFakeArgs(source, "aa", 1)
 
-	testParse(t, false, source, "aa", 1)
+	parseArgsTest(t, false, source, "aa", 1)
 }
 func TestParse_BadCount(t *testing.T) {
 	source, _ := ioutil.TempDir("", "")
@@ -51,14 +56,13 @@ func TestParse_BadCount(t *testing.T) {
 
 	buildFakeArgs(source, dest, 0)
 
-	testParse(t, false, source, dest, 0)
+	parseArgsTest(t, false, source, dest, 0)
 }
-*/
 func TestParse_Good(t *testing.T) {
 	source, _ := ioutil.TempDir("", "")
 	dest, _ := ioutil.TempDir("", "")
 
 	buildFakeArgs(source, dest, 1)
 
-	testParse(t, true, source, dest, 1)
+	parseArgsTest(t, true, source, dest, 1)
 }

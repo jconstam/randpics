@@ -6,17 +6,24 @@ import (
 	"path/filepath"
 )
 
-func parseArgs() (bool, string, string, int) {
-	sourcePath := flag.String("src", "", "The source directory where the pictures are located.")
-	destPath := flag.String("dst", "", "The destination directory where the pictures well be transferred.")
-	count := flag.Int("count", 0, "The number of pictures to copy.")
+var flagSourcePath *string
+var flagDestPath *string
+var flagCount *int
 
+func setupArgs() {
+	flagSourcePath = flag.String("src", "", "The source directory where the pictures are located.")
+	flagDestPath = flag.String("dst", "", "The destination directory where the pictures well be transferred.")
+	flagCount = flag.Int("count", 0, "The number of pictures to copy.")
+}
+
+func parseArgs() (bool, string, string, int) {
 	flag.Parse()
 
-	source, _ := filepath.Abs(*sourcePath)
-	dest, _ := filepath.Abs(*destPath)
+	source, _ := filepath.Abs(*flagSourcePath)
+	dest, _ := filepath.Abs(*flagDestPath)
+	count := *flagCount
 
-	return validateArgs(source, dest, *count), *sourcePath, *destPath, *count
+	return validateArgs(source, dest, count), *flagSourcePath, *flagDestPath, *flagCount
 }
 
 func validateArgs(sourcePath string, destPath string, count int) bool {
@@ -25,11 +32,5 @@ func validateArgs(sourcePath string, destPath string, count int) bool {
 
 func pathExists(path string) bool {
 	_, err := os.Stat(path)
-	if err == nil {
-		return true
-	}
-	if os.IsNotExist(err) {
-		return false
-	}
-	return true
+	return err == nil
 }

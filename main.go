@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+	setupArgs()
 	argsGood, source, dest, count := parseArgs()
 	if argsGood != true {
 		fmt.Printf("ERROR PARSING ARGS: %v %v %v\n", source, dest, count)
