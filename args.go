@@ -1,4 +1,4 @@
-package args
+package randpics
 
 import (
 	"flag"
@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-func ParseArgs() (bool, string, string, int) {
+func parseArgs() (bool, string, string, int) {
 	sourcePath := flag.String("src", "", "The source directory where the pictures are located.")
 	destPath := flag.String("dst", "", "The destination directory where the pictures well be transferred.")
 	count := flag.Int("count", 0, "The number of pictures to copy.")

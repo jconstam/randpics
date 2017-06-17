@@ -1,4 +1,4 @@
-package picSource
+package randpics
 
 import (
 	"math/rand"
@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func GetPics(sourcePath string, count int) []string {
+func getPics(sourcePath string, count int) []string {
 	var allFiles []string
 	filepath.Walk(sourcePath, func(path string, f os.FileInfo, _ error) error {
 		if !f.IsDir() {

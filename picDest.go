@@ -1,4 +1,4 @@
-package picDest
+package randpics
 
 import (
 	"fmt"
@@ -7,14 +7,14 @@ import (
 	"path/filepath"
 )
 
-func MoveToDest(destPath string, files []string) {
+func moveToDest(destPath string, files []string) {
 	removeContents(destPath)
 
 	for _, sourcePath := range files {
 		fileName := filepath.Base(sourcePath)
 
 		fmt.Printf("\tCopying %v...\n", fileName)
-		err := CopyFile(sourcePath, filepath.Join(destPath, fileName))
+		err := copyFile(sourcePath, filepath.Join(destPath, fileName))
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -44,7 +44,7 @@ func removeContents(dir string) error {
 // CopyFile copies a file from src to dst. If src and dst files exist, and are
 // the same, then return success. Otherise, attempt to create a hard link
 // between the two files. If that fail, copy the file contents from src to dst.
-func CopyFile(src, dst string) (err error) {
+func copyFile(src, dst string) (err error) {
 	sfi, err := os.Stat(src)
 	if err != nil {
 		return

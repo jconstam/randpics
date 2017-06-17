@@ -1,7 +1,6 @@
-package args
+package randpics
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -9,7 +8,7 @@ import (
 )
 
 func testParse(t *testing.T, argsGoodExpected bool, sourceExpected string, destExpected string, countExpected int) {
-	argsGood, source, dest, count := ParseArgs()
+	argsGood, source, dest, count := parseArgs()
 
 	if argsGood != argsGoodExpected {
 		t.Errorf("Expected parse status to be \"%v\", got \"%v\"", argsGoodExpected, argsGood)
@@ -27,7 +26,6 @@ func testParse(t *testing.T, argsGoodExpected bool, sourceExpected string, destE
 
 func buildFakeArgs(sourcePath string, destPath string, count int) {
 	os.Args = []string{"", "-src=" + sourcePath, "-dst=" + destPath, "-count=" + strconv.Itoa(count)}
-	fmt.Printf("ARGS: %v\n", os.Args)
 }
 
 /*
