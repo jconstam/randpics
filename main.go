@@ -14,6 +14,10 @@ func main() {
 
 	fmt.Printf("Searching in %v for pictures...\n", source)
 	sourcePics := getPics(source, count)
+	if len(sourcePics) == 0 {
+		fmt.Printf("No pictures found in %v\n", source)
+		return
+	}
 
 	fmt.Printf("Moving %v pictures to %v...\n", count, dest)
 	moveToDest(dest, sourcePics)

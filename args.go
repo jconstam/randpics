@@ -10,10 +10,16 @@ var flagSourcePath *string
 var flagDestPath *string
 var flagCount *int
 
+var argsSetup = false
+
 func setupArgs() {
-	flagSourcePath = flag.String("src", "", "The source directory where the pictures are located.")
-	flagDestPath = flag.String("dst", "", "The destination directory where the pictures well be transferred.")
-	flagCount = flag.Int("count", 0, "The number of pictures to copy.")
+	if !argsSetup {
+		flagSourcePath = flag.String("src", "", "The source directory where the pictures are located.")
+		flagDestPath = flag.String("dst", "", "The destination directory where the pictures well be transferred.")
+		flagCount = flag.Int("count", 0, "The number of pictures to copy.")
+
+		argsSetup = true
+	}
 }
 
 func parseArgs() (bool, string, string, int) {

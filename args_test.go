@@ -41,6 +41,8 @@ func TestParse_BadSource(t *testing.T) {
 	buildFakeArgs("aa", dest, 1)
 
 	parseArgsTest(t, false, "aa", dest, 1)
+
+	os.Remove(dest)
 }
 
 func TestParse_BadDest(t *testing.T) {
@@ -49,6 +51,8 @@ func TestParse_BadDest(t *testing.T) {
 	buildFakeArgs(source, "aa", 1)
 
 	parseArgsTest(t, false, source, "aa", 1)
+
+	os.Remove(source)
 }
 func TestParse_BadCount(t *testing.T) {
 	source, _ := ioutil.TempDir("", "")
@@ -57,6 +61,9 @@ func TestParse_BadCount(t *testing.T) {
 	buildFakeArgs(source, dest, 0)
 
 	parseArgsTest(t, false, source, dest, 0)
+
+	os.Remove(source)
+	os.Remove(dest)
 }
 func TestParse_Good(t *testing.T) {
 	source, _ := ioutil.TempDir("", "")
@@ -65,4 +72,7 @@ func TestParse_Good(t *testing.T) {
 	buildFakeArgs(source, dest, 1)
 
 	parseArgsTest(t, true, source, dest, 1)
+
+	os.Remove(source)
+	os.Remove(dest)
 }

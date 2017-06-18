@@ -20,6 +20,10 @@ func getPics(sourcePath string, count int) []string {
 		return nil
 	})
 
+	if len(allFiles) == 0 {
+		return allFiles
+	}
+
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	var randFiles []string
