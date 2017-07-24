@@ -1,4 +1,4 @@
-package randpics
+package main
 
 import (
 	"fmt"

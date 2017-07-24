@@ -1,4 +1,4 @@
-package randpics
+package main
 
 import (
 	"io/ioutil"
@@ -21,7 +21,7 @@ func TestMain_CopyAllNoDelete(t *testing.T) {
 
 	file1 := createTempPicFile(source)
 
-	buildFakeArgs(source, dest, 1)
+	buildFakeArgs(source, dest, 1, []string{})
 	main()
 
 	if _, err := os.Stat(filepath.Join(dest, file1)); os.IsNotExist(err) {

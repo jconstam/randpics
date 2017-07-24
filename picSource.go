@@ -1,18 +1,27 @@
-package randpics
+package main
 
 import (
 	"math/rand"
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 	"time"
 )
 
-func getPics(sourcePath string, count int) []string {
+func getPics(sourcePath string, count int, excludeList []string) []string {
 	var allFiles []string
 	filepath.Walk(sourcePath, func(path string, f os.FileInfo, _ error) error {
 		if !f.IsDir() {
 			r, err := regexp.MatchString(".jpg", f.Name())
+
+			for _, excludeVal := range excludeList {
+				if strings.Contains(strings.ToLower(path), strings.ToLower(excludeVal)) {
+					r = false
+					break
+				}
+			}
+
 			if err == nil && r {
 				allFiles = append(allFiles, path)
 			}
